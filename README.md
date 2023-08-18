@@ -7,4 +7,5 @@ A basic SDL2 raycasting engine written in C++. Raycasting is a rendering techniq
 
 ## References
 https://lodev.org/cgtutor/raycasting.html
+
 https://lazyfoo.net/tutorials/SDL/

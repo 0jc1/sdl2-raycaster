@@ -1,7 +1,9 @@
-#include "src/include/SDL2/SDL.h"
+#include <SDL.h>
 #include <iostream>
 #include <string>
 #include "Player.hpp"
+
+
 
 class Game
 {

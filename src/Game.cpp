@@ -1,5 +1,9 @@
 #include "Game.hpp"
 #include <cmath>
+#include <vector>
+#include <thread>
+#include <atomic>
+#include <iostream>
 
 #define mapWidth 24
 #define mapHeight 24
@@ -243,8 +247,10 @@ void Game::render()
                 side = 1;
             }
             // Check if ray has hit a wall
-            if (worldMap[mapX][mapY] > 0)
+            if (worldMap[mapX][mapY] > 0) {
                 hit = 1;
+                break;
+            }
 
         }
 

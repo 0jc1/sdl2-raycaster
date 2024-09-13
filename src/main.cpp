@@ -9,7 +9,7 @@ using namespace std;
 */
 
 const int WIDTH = 640 * 2, HEIGHT = 480 * 2;
-const double FPS_LIMIT = 120;
+const long FPS_LIMIT = 60;
 
 Game *game = nullptr;
 
@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 {
     double a = 0;
     double b = 0;
-    double delta = 0;
+    long delta = 0;
     double fps = 0;
 
     game = new Game();
@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
 
             game->update();
             game->render();
+
         }
     }
 

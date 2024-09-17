@@ -180,6 +180,22 @@ void Game::render()
     SDL_SetRenderDrawColor(renderer, 10, 0, 160, 255);
     SDL_RenderClear(renderer);
 
+    // which box of the map we're in
+    int mapX = int(p->pos.x);
+    int mapY = int(p->pos.y);
+
+    // length of ray from current position to next x or y-side
+    double sideDistX;
+    double sideDistY;
+
+    // what direction to step in x or y-direction (always either +1 or -1)
+    int stepX;
+    int stepY;
+
+    int hit = 0; // was there a wall hit?
+    int side;    // was a NS or a EW wall hit?
+    int pitch = 80;
+
     for (int x = 0; x < screenWidth; x++)
     {
         // calculate ray position and direction
@@ -187,25 +203,10 @@ void Game::render()
         double rayDirX = p->dir.x + p->plane.x * cameraX;
         double rayDirY = p->dir.y + p->plane.y * cameraX;
 
-        // which box of the map we're in
-        int mapX = int(p->pos.x);
-        int mapY = int(p->pos.y);
-
-        // length of ray from current position to next x or y-side
-        double sideDistX;
-        double sideDistY;
-
         // length of ray from one x or y-side to next x or y-side
         double deltaDistX = (rayDirX == 0) ? 1e30 : std::abs(1 / rayDirX);
         double deltaDistY = (rayDirY == 0) ? 1e30 : std::abs(1 / rayDirY);
         double perpWallDist;
-
-        // what direction to step in x or y-direction (always either +1 or -1)
-        int stepX;
-        int stepY;
-
-        int hit = 0; // was there a wall hit?
-        int side;    // was a NS or a EW wall hit?
 
         // calculate step and initial sideDist
         if (rayDirX < 0)
@@ -262,8 +263,6 @@ void Game::render()
 
         // Calculate height of line to draw on screen
         int lineHeight = (int)(screenHeight / perpWallDist);
-
-        int pitch = 80;
 
         // calculate lowest and highest pixel to fill in current stripe
         int drawStart = -lineHeight / 2 + screenHeight / 2 + pitch;

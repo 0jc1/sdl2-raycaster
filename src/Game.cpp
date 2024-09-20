@@ -155,6 +155,7 @@ void Game::handleEvents()
 
     if (keystates[SDL_SCANCODE_W])
     {
+        //collision check
         if (worldMap[int(p->pos.x + p->dir.x * p->walkSpeed)][int(p->pos.y)] == 0)
             p->pos.x += p->dir.x * p->walkSpeed;
         if (worldMap[int(p->pos.x)][int(p->pos.y + p->dir.y * p->walkSpeed)] == 0)
@@ -180,21 +181,20 @@ void Game::render()
     SDL_SetRenderDrawColor(renderer, 10, 0, 160, 255);
     SDL_RenderClear(renderer);
 
-    // which box of the map we're in
-    int mapX = int(p->pos.x);
-    int mapY = int(p->pos.y);
+    int pitch = 80;
 
-    // length of ray from current position to next x or y-side
     double sideDistX;
     double sideDistY;
 
-    // what direction to step in x or y-direction (always either +1 or -1)
+    int mapX;
+    int mapY;
+
     int stepX;
     int stepY;
 
-    int hit = 0; // was there a wall hit?
     int side;    // was a NS or a EW wall hit?
-    int pitch = 80;
+
+    int hit; 
 
     for (int x = 0; x < screenWidth; x++)
     {
@@ -203,10 +203,17 @@ void Game::render()
         double rayDirX = p->dir.x + p->plane.x * cameraX;
         double rayDirY = p->dir.y + p->plane.y * cameraX;
 
+        // which box of the map we're in
+        mapX = int(p->pos.x);
+        mapY = int(p->pos.y);
+
+
         // length of ray from one x or y-side to next x or y-side
         double deltaDistX = (rayDirX == 0) ? 1e30 : std::abs(1 / rayDirX);
         double deltaDistY = (rayDirY == 0) ? 1e30 : std::abs(1 / rayDirY);
         double perpWallDist;
+
+        hit = 0; // was there a wall hit?
 
         // calculate step and initial sideDist
         if (rayDirX < 0)
@@ -231,6 +238,7 @@ void Game::render()
             sideDistY = (mapY + 1.0 - p->pos.y) * deltaDistY;
         }
 
+
         // perform Digital Differential Analysis (DDA)
         while (hit == 0)
         {
@@ -252,7 +260,6 @@ void Game::render()
                 hit = 1;
                 break;
             }
-
         }
 
         // Calculate distance of perpendicular ray (Euclidean distance would give fisheye effect)

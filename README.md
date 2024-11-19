@@ -9,7 +9,7 @@ A basic SDL2 raycasting engine written in C++. Raycasting is a rendering techniq
 ### Linux: 
 First, make sure you have a C++ compiler installed. Then, install SDL2 and CMake:
 ```
-sudo apt-get install libsdl2-dev cmake
+sudo apt-get install libsdl2-dev cmake make g++
 ```
 
 Build and compile:

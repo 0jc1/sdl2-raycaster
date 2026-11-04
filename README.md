@@ -1,10 +1,12 @@
 # SDL2 Raycaster
-A basic SDL2 raycasting engine written in C++. Raycasting is a rendering technique to create a psuedo 3D game from a 2D map. This was done by casting rays for each horizontal screen pixel and calculating the length of the rays using DDA algorithm.
+A basic SDL2 raycasting engine written in C++. Raycasting is a rendering technique to create a psuedo 3D game from a 2D map. This was done by casting rays for each horizontal screen pixel and calculating the length of the rays using DDA algorithm. 
 
 ## Screenshot
 ![eyJhbGciOiJIUzI1NiJ9 eyJpbWciOiJfMWFhNjhiZDAyZDdjYTMwZjI4ZTdmZDcyYmIyMjYzNjIifQ hIVZ5ViT5pkWYZiyExs9b1qyG2560jVeXvxE3MPVkuc-png](https://github.com/jcook0/sdl2-raycaster/assets/52017130/95ad71e5-ce50-4607-823e-858a04a17847)
 
 ## Setup 
+
+The minimum version is C++11
 
 ### Linux: 
 First, make sure you have a C++ compiler installed. Then, install SDL2 and CMake:
